@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_option_menu import option_menu
 
 def length_converter(value, from_unit, to_unit):
     conversion_factors = {
@@ -37,16 +38,23 @@ def temperature_converter(value, from_unit, to_unit):
         return (value - 273.15) * 9/5 + 32
     return value
 
-st.title("Unit Converter")
+# Custom UI with Sidebar and Option Menu
+st.set_page_config(page_title="Unit Converter", page_icon="🔄", layout="centered")
+st.title("🔄 Unit Converter")
 
-conversion_type = st.selectbox("Select conversion type", ["Length", "Weight", "Temperature"])
+with st.sidebar:
+    st.image("https://cdn-icons-png.flaticon.com/512/1040/1040241.png", width=150)
+    conversion_type = option_menu("Select Conversion Type", ["Length", "Weight", "Temperature"],
+                                  icons=["rulers", "balance-scale", "thermometer-half"], menu_icon="list", default_index=0)
+
+st.markdown("---")
 
 if conversion_type == "Length":
     units = ["meter", "kilometer", "centimeter", "millimeter", "inch", "foot", "yard", "mile"]
     from_unit = st.selectbox("From Unit", units)
     to_unit = st.selectbox("To Unit", units)
-    value = st.number_input("Enter value", min_value=0.0, format="%.2f")
-    if st.button("Convert"):
+    value = st.number_input("Enter Value", min_value=0.0, format="%.2f")
+    if st.button("Convert", use_container_width=True):
         result = length_converter(value, from_unit, to_unit)
         st.success(f"{value} {from_unit} is equal to {result:.4f} {to_unit}")
 
@@ -54,8 +62,8 @@ elif conversion_type == "Weight":
     units = ["gram", "kilogram", "pound", "ounce"]
     from_unit = st.selectbox("From Unit", units)
     to_unit = st.selectbox("To Unit", units)
-    value = st.number_input("Enter value", min_value=0.0, format="%.2f")
-    if st.button("Convert"):
+    value = st.number_input("Enter Value", min_value=0.0, format="%.2f")
+    if st.button("Convert", use_container_width=True):
         result = weight_converter(value, from_unit, to_unit)
         st.success(f"{value} {from_unit} is equal to {result:.4f} {to_unit}")
 
@@ -63,7 +71,7 @@ elif conversion_type == "Temperature":
     units = ["Celsius", "Fahrenheit", "Kelvin"]
     from_unit = st.selectbox("From Unit", units)
     to_unit = st.selectbox("To Unit", units)
-    value = st.number_input("Enter value", format="%.2f")
-    if st.button("Convert"):
+    value = st.number_input("Enter Value", format="%.2f")
+    if st.button("Convert", use_container_width=True):
         result = temperature_converter(value, from_unit, to_unit)
         st.success(f"{value} {from_unit} is equal to {result:.2f} {to_unit}")

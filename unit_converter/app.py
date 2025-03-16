@@ -1,6 +1,8 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
+from PIL import Image
 import os
+
 
 def length_converter(value, from_unit, to_unit):
     conversion_factors = {
@@ -44,7 +46,9 @@ st.set_page_config(page_title="Unit Converter", page_icon="🔄", layout="center
 st.title("🔄 Unit Converter")
 
 with st.sidebar:
-    st.image(os.path.abspath("logo.png"), width=150)
+    image_path = os.path.abspath("logo.png")
+    image = Image.open(image_path)
+    st.sidebar.image(image, width=150)
     conversion_type = option_menu("Select Conversion Type", ["Length", "Weight", "Temperature"],
                                   icons=["rulers", "balance-scale", "thermometer-half"], menu_icon="list", default_index=0)
 

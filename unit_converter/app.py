@@ -47,8 +47,7 @@ st.title("🔄 Unit Converter")
 
 with st.sidebar:
     image_path = os.path.abspath("logo.png")
-    image = Image.open(image_path)
-    st.sidebar.image(image, width=150)
+    st.sidebar.image(image_path, width=150)
     conversion_type = option_menu("Select Conversion Type", ["Length", "Weight", "Temperature"],
                                   icons=["rulers", "balance-scale", "thermometer-half"], menu_icon="list", default_index=0)
 

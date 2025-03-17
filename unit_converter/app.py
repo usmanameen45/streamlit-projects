@@ -46,7 +46,7 @@ st.set_page_config(page_title="Unit Converter", page_icon="🔄", layout="center
 st.title("🔄 Unit Converter")
 
 with st.sidebar:
-    image_path = os.path.abspath("logo.png")
+    image_path = os.path.abspath("unit_converter/logo.png")
     st.sidebar.image(image_path, width=150)
     conversion_type = option_menu("Select Conversion Type", ["Length", "Weight", "Temperature"],
                                   icons=["rulers", "balance-scale", "thermometer-half"], menu_icon="list", default_index=0)
